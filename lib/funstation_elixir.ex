@@ -1,0 +1,2 @@
+defmodule FunstationElixir do
+end
