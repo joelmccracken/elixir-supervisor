@@ -14,7 +14,7 @@ defmodule FunstationElixir.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:logger]]
+    [applications: [:logger, :quantum]]
   end
 
   # Dependencies can be Hex packages:
@@ -29,6 +29,7 @@ defmodule FunstationElixir.Mixfile do
   defp deps do
     [{:earmark, "~> 1.0", only: :dev},
      {:ex_doc, "~> 0.13", only: :dev},
-     {:dialyxir, "~> 0.3", only: [:dev]}]
+     {:dialyxir, "~> 0.3", only: [:dev]},
+     {:quantum, "~> 1.7.1"}]
   end
 end
