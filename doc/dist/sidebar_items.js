@@ -1,1 +1,1 @@
-sidebarNodes={"exceptions":[],"extras":[{"id":"api-reference","title":"API Reference","headers":[]}],"modules":[{"id":"FunstationElixir","title":"FunstationElixir"},{"id":"Mix.Tasks.Status","title":"Mix.Tasks.Status","functions":[{"id":"run/1","anchor":"run/1"}]}],"protocols":[]}
+sidebarNodes={"exceptions":[],"extras":[{"id":"api-reference","title":"API Reference","headers":[]}],"modules":[{"id":"ElixirSupervisor","title":"ElixirSupervisor"},{"id":"Mix.Tasks.Status","title":"Mix.Tasks.Status","functions":[{"id":"run/1","anchor":"run/1"}]}],"protocols":[]}

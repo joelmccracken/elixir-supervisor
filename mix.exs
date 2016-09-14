@@ -1,8 +1,8 @@
-defmodule FunstationElixir.Mixfile do
+defmodule ElixirSupervisor.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :funstation_elixir,
+    [app: :elixir_supervisor,
      version: "0.0.1",
      elixir: "~> 1.2",
      build_embedded: Mix.env == :prod,

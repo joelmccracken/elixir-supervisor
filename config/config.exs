@@ -10,11 +10,11 @@ use Mix.Config
 
 # You can configure for your application as:
 #
-#     config :funstation_elixir, key: :value
+#     config :elixir_supervisor, key: :value
 #
 # And access this configuration in your application as:
 #
-#     Application.get_env(:funstation_elixir, :key)
+#     Application.get_env(:elixir_supervisor, :key)
 #
 # Or configure a 3rd-party app:
 #
@@ -31,6 +31,6 @@ use Mix.Config
 
 config :quantum, cron: [
   # Every minute
-  "* * * * *":      {FunstationElixir, :heartbeat},
-  "*/30 * * * *":      {FunstationElixir, :backup},
+  "* * * * *":      {ElixirSupervisor, :heartbeat},
+  "*/30 * * * *":      {ElixirSupervisor, :backup},
 ]

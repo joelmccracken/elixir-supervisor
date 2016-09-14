@@ -1,6 +1,6 @@
-defmodule FunstationElixirTest do
+defmodule ElixirSupervisorTest do
   use ExUnit.Case
-  doctest FunstationElixir
+  doctest ElixirSupervisor
 
   test "the truth" do
     assert 1 + 1 == 2

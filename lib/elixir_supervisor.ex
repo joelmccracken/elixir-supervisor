@@ -1,4 +1,4 @@
-defmodule FunstationElixir do
+defmodule ElixirSupervisor do
   def heartbeat do
     IO.puts "Hello, heart!"
   end
