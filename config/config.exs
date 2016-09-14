@@ -32,4 +32,5 @@ use Mix.Config
 config :quantum, cron: [
   # Every minute
   "* * * * *":      {FunstationElixir, :heartbeat},
+  "*/30 * * * *":      {FunstationElixir, :backup},
 ]
