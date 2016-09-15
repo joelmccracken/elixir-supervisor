@@ -1,10 +1,12 @@
 defmodule ElixirSupervisor do
+  require Logger
+
   def heartbeat do
-    IO.puts "Hello, heart!"
+    Logger.info "heartbeat"
   end
 
   def backup do
-    IO.puts "starting backup"
+    Logger.info "starting backup"
     {output, status} = System.cmd("rclone",
       [
         "sync",
@@ -16,17 +18,24 @@ defmodule ElixirSupervisor do
       stderr_to_stdout: true
     )
 
-    log_file_location = Path.expand("~/.ex_supervisor/run.log")
+    Logger.info "Exit status is #{status}"
+    Logger.info "output is #{output}"
+    Logger.info "finishing backup"
+  end
 
-    IO.puts "Log file at #{log_file_location}"
+  def with_log_file(file_handler) do
+    log_location = Path.expand("~/.ex_supervisor/run.log")
+    log_dirname = Path.dirname(log_location)
 
-    File.open(log_file_location, [:append], fn(file)->
-      date = DateTime.to_string DateTime.utc_now
-      IO.puts(file, "At #{date}")
-      IO.puts(file, "Exit status is #{status}")
-      IO.puts(file, "output is #{output}")
-    end)
+    open_and_call_back = fn ->
+      File.open(log_location, [:append], file_handler)
+    end
 
-    IO.puts "finishing backup"
+    if File.exists?(log_location) do
+      open_and_call_back.()
+    else
+      File.mkdir_p(log_dirname)
+      open_and_call_back.()
+    end
   end
 end
