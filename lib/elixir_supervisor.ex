@@ -22,20 +22,4 @@ defmodule ElixirSupervisor do
     Logger.info "output is #{output}"
     Logger.info "finishing backup"
   end
-
-  def with_log_file(file_handler) do
-    log_location = Path.expand("~/.ex_supervisor/run.log")
-    log_dirname = Path.dirname(log_location)
-
-    open_and_call_back = fn ->
-      File.open(log_location, [:append], file_handler)
-    end
-
-    if File.exists?(log_location) do
-      open_and_call_back.()
-    else
-      File.mkdir_p(log_dirname)
-      open_and_call_back.()
-    end
-  end
 end
