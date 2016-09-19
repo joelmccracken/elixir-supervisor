@@ -1,14 +1,29 @@
-defmodule Mix.Tasks.InstallPlist do
+defmodule Mix.Tasks.Service do
   use Mix.Task
 
-  def run(_args) do
-    plist_file_location = Path.expand("~/Library/LaunchAgents/elixir_supervisor.plist")
+  def plist_file_location do
+    Path.expand("~/Library/LaunchAgents/elixir_supervisor.plist")
+  end
+
+  def run(args) do
+
+    subcommand = List.first(args)
+
+    case subcommand do
+      nil ->
+        IO.puts "please supply a sub-command"
+        exit(1)
+      "install_plist" -> install_plist
+      "launch"
+    end
+
+    IO.inspect _args
+
+    exit(10)
     out_location = Path.expand("~/.ex_supervisor/out.log")
     err_location = Path.expand("~/.ex_supervisor/err.log")
     current_directory = System.cwd!()
     elixir_location = "/usr/local/bin"
-    # {whoami, 0} = System.cmd("/usr/bin/whoami", [])
-    # user = String.trim(whoami)
 
     unless File.exists?(Path.join(current_directory, "mix.exs")) do
       IO.puts("Please run from within the root directory of the project.")
@@ -56,4 +71,12 @@ defmodule Mix.Tasks.InstallPlist do
     {output, 0} = System.cmd("launchctl", ["load", plist_file_location])
     IO.puts output
   end
+
+  def launchctl_cmd
+
+  def install_plist do
+
+  end
+
+
 end
