@@ -17,7 +17,7 @@ defmodule ElixirSupervisor do
       ],
       stderr_to_stdout: true
     )
-
+    File.write(Path.expand("~/.ex_supervisor/last-backup-date"), DateTime.to_string DateTime.utc_now)
     Logger.info "Exit status is #{status}"
     Logger.info "output is #{output}"
     Logger.info "finishing backup"
