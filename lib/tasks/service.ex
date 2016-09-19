@@ -1,11 +1,8 @@
 defmodule Mix.Tasks.Service do
   use Mix.Task
 
-  def plist_file_location do
-    Path.expand("~/Library/LaunchAgents/elixir_supervisor.plist")
-  end
-
   def run(args) do
+    IO.inspect args
 
     subcommand = List.first(args)
 
@@ -17,9 +14,11 @@ defmodule Mix.Tasks.Service do
       "launch"
     end
 
-    IO.inspect _args
 
     exit(10)
+  end
+
+  def install_plist do
     out_location = Path.expand("~/.ex_supervisor/out.log")
     err_location = Path.expand("~/.ex_supervisor/err.log")
     current_directory = System.cwd!()
@@ -63,20 +62,21 @@ defmodule Mix.Tasks.Service do
     """
 
     if File.exists?(plist_file_location) do
-      System.cmd("launchctl", ["unload", plist_file_location])
+      launchctl_cmd(["unload", plist_file_location])
     end
 
     :ok = File.write(plist_file_location, file_content)
 
-    {output, 0} = System.cmd("launchctl", ["load", plist_file_location])
+    output = launchctl_cmd(["load", plist_file_location])
     IO.puts output
   end
 
-  def launchctl_cmd
-
-  def install_plist do
-
+  defp plist_file_location do
+    Path.expand("~/Library/LaunchAgents/elixir_supervisor.plist")
   end
 
-
+  defp launchctl_cmd(args) do
+    {output, 0} = System.cmd("launchctl", args)
+    output
+  end
 end
