@@ -11,11 +11,9 @@ defmodule Mix.Tasks.Service do
         IO.puts "please supply a sub-command"
         exit(1)
       "install_plist" -> install_plist
-      "launch"
+      "start" -> start
+      "stop"  -> stop
     end
-
-
-    exit(10)
   end
 
   def install_plist do
@@ -42,7 +40,7 @@ defmodule Mix.Tasks.Service do
     <string>#{elixir_location}:/usr/bin</string>
     </dict>
     <key>Label</key>
-    <string>elixir.supervisor</string>
+    <string>#{service_name}</string>
     <key>ProgramArguments</key>
     <array>
     <string>/usr/local/bin/mix</string>
@@ -75,8 +73,20 @@ defmodule Mix.Tasks.Service do
     Path.expand("~/Library/LaunchAgents/elixir_supervisor.plist")
   end
 
+  defp service_name do
+    "elixir.supervisor"
+  end
+
   defp launchctl_cmd(args) do
     {output, 0} = System.cmd("launchctl", args)
     output
+  end
+
+  defp start do
+    launchctl_cmd(["start", service_name])
+  end
+
+  defp stop do
+    launchctl_cmd(["stop", service_name])
   end
 end
