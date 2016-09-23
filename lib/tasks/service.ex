@@ -2,8 +2,6 @@ defmodule Mix.Tasks.Service do
   use Mix.Task
 
   def run(args) do
-    IO.inspect args
-
     subcommand = List.first(args)
 
     case subcommand do
